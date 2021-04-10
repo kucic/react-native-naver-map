@@ -21,7 +21,7 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
     private final FusedLocationSource locationSource;
     private final NaverMapOptions naverMapOptions;
     private RNNaverMapView mapView;
-    private RNNaverMapView prevMapView;
+    private RNNaverMapView.NMapInstanceState savedInstanceState;
     private boolean isAttachedToWindow = false;
 
     public RNNaverMapViewContainer(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource, NaverMapOptions naverMapOptions) {
@@ -74,10 +74,11 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
         super.onAttachedToWindow();
         isAttachedToWindow = true;
         if (mapView == null) {
+            // FIXME 굳이 다시 뷰를 생성해야 하나? 뷰 재사용 테스트해보기.
             mapView = new RNNaverMapView(themedReactContext, appContext, locationSource, naverMapOptions);
-            if (prevMapView != null) {
-                mapView.restoreFrom(prevMapView);
-                prevMapView = null;
+            if (savedInstanceState != null) {
+                mapView.restoreInstanceState(savedInstanceState);
+                savedInstanceState = null;
             }
             addView(mapView);
         }
@@ -89,9 +90,9 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         isAttachedToWindow = false;
+        savedInstanceState = mapView.getInstanceState();
         onStop();
         removeView(mapView);
-        prevMapView = mapView;
         mapView = null;
     }
 

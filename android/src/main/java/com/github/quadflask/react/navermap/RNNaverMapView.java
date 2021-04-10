@@ -260,7 +260,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
                 features.add(index, annotation);
                 int visibility = annotation.getVisibility();
                 annotation.setVisibility(View.INVISIBLE);
-                ViewGroup annotationParent = (ViewGroup)annotation.getParent();
+                ViewGroup annotationParent = (ViewGroup) annotation.getParent();
                 if (annotationParent != null) {
                     annotationParent.removeView(annotation);
                 }
@@ -310,31 +310,79 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         emitEvent("onMapClick", param);
     }
 
-    public void restoreFrom(RNNaverMapView prevState) {
-        if (prevState != null && prevState.naverMap != null) {
-            CameraPosition cameraPosition = prevState.naverMap.getCameraPosition();
-            setCenter(cameraPosition.target, cameraPosition.zoom, cameraPosition.tilt, cameraPosition.bearing);
+    public static class NMapInstanceState {
+        private boolean isLocationButtonEnabled;
+        private boolean isCompassEnabled;
+        private boolean isScaleBarEnabled;
+        private boolean isZoomControlEnabled;
+        private int logoGravity;
+        private int[] logoMargin;
+        private CameraPosition cameraPosition;
+        private LocationTrackingMode trackingMode;
+        private NaverMap.MapType mapType;
+        private float buildHeight;
+        private boolean isNightModeEnabled;
+        private int[] contentPadding;
 
-            setLocationTrackingMode(prevState.naverMap.getLocationTrackingMode().ordinal());
-            setMapType(prevState.naverMap.getMapType());
-            setBuildingHeight(prevState.naverMap.getBuildingHeight());
-            setNightModeEnabled(prevState.naverMap.isNightModeEnabled());
-            int[] padding = prevState.getMap().getContentPadding();
-            setMapPadding(padding[0], padding[1], padding[2], padding[3]);
+        private List<RNNaverMapFeature<?>> features;
+    }
 
-            UiSettings uiSettings = prevState.naverMap.getUiSettings();
-            showsMyLocationButton(uiSettings.isLocationButtonEnabled());
-            setCompassEnabled(uiSettings.isCompassEnabled());
-            setScaleBarEnabled(uiSettings.isScaleBarEnabled());
-            setZoomControlEnabled(uiSettings.isZoomControlEnabled());
-            setLogoGravity(uiSettings.getLogoGravity());
-            int[] logoMargin = uiSettings.getLogoMargin();
-            setLogoMargin(logoMargin[0], logoMargin[1], logoMargin[2], logoMargin[3]);
+    public NMapInstanceState getInstanceState() {
+        final NMapInstanceState state = new NMapInstanceState();
 
-            for (int i = 0; i < prevState.features.size(); i++) {
-                addFeature(prevState.features.get(i), i);
-            }
+        state.cameraPosition = naverMap.getCameraPosition();
+        state.trackingMode = naverMap.getLocationTrackingMode();
+        state.mapType = naverMap.getMapType();
+        state.buildHeight = naverMap.getBuildingHeight();
+        state.isNightModeEnabled = naverMap.isNightModeEnabled();
+        state.contentPadding = naverMap.getContentPadding();
+
+        UiSettings uiSettings = naverMap.getUiSettings();
+        state.isLocationButtonEnabled = uiSettings.isLocationButtonEnabled();
+        state.isCompassEnabled = uiSettings.isCompassEnabled();
+        state.isScaleBarEnabled = uiSettings.isScaleBarEnabled();
+        state.isZoomControlEnabled = uiSettings.isZoomControlEnabled();
+        state.logoGravity = uiSettings.getLogoGravity();
+        state.logoMargin = uiSettings.getLogoMargin();
+
+        state.features = new ArrayList<>(this.features);
+
+        return state;
+    }
+
+    public void restoreInstanceState(NMapInstanceState prevState) {
+        if (prevState == null) return;
+
+        CameraPosition cameraPosition = prevState.cameraPosition;
+        setCenter(cameraPosition.target, cameraPosition.zoom, cameraPosition.tilt, cameraPosition.bearing);
+
+        setLocationTrackingMode(prevState.trackingMode.ordinal());
+        setMapType(prevState.mapType);
+        setBuildingHeight(prevState.buildHeight);
+        setNightModeEnabled(prevState.isNightModeEnabled);
+        int[] padding = prevState.contentPadding;
+        setMapPadding(padding[0], padding[1], padding[2], padding[3]);
+
+        showsMyLocationButton(prevState.isLocationButtonEnabled);
+        setCompassEnabled(prevState.isCompassEnabled);
+        setScaleBarEnabled(prevState.isScaleBarEnabled);
+        setZoomControlEnabled(prevState.isZoomControlEnabled);
+        setLogoGravity(prevState.logoGravity);
+        int[] logoMargin = prevState.logoMargin;
+        setLogoMargin(logoMargin[0], logoMargin[1], logoMargin[2], logoMargin[3]);
+
+        for (int i = 0; i < prevState.features.size(); i++) {
+            addFeature(prevState.features.get(i), i);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        themedReactContext = null;
+        locationSource = null;
+        naverMap = null;
+        attacherGroup = null;
+        super.onDestroy();
     }
 
     private void emitEvent(String eventName, WritableMap param) {
