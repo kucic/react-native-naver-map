@@ -1,4 +1,4 @@
-package com.example;
+package com.github.punkblood9.rnnmap;
 
 import android.app.Application;
 import android.content.Context;

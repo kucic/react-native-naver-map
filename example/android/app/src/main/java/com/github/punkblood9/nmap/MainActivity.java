@@ -1,4 +1,4 @@
-package com.example;
+package com.github.punkblood9.rnnmap;
 
 import com.facebook.react.ReactActivity;
 

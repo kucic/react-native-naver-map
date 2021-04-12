@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.example">
+  package="com.github.punkblood9.rnnmap">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -26,7 +26,7 @@
 
         <meta-data
                 android:name="com.naver.maps.map.CLIENT_ID"
-                android:value="ke9x5voiq8" />
+                android:value="4x7gg7riww" />
     </application>
 
 </manifest>
