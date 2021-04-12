@@ -28,7 +28,7 @@ $ cd ios/ && pod install
 - **React Native <= 0.59**
 
 ```bash
-$ react-native link react-native-nmap
+$ react-native link react-native-rnnmap
 $ cd ios/ && pod install
 ```
 
@@ -93,7 +93,7 @@ allprojects {
 > [example/App.js](https://github.com/QuadFlask/react-native-naver-map/blob/master/example/App.js) 
 
 ```tsx
-import NaverMapView, {Circle, Marker, Path, Polyline, Polygon} from "react-native-nmap";
+import NaverMapView, {Circle, Marker, Path, Polyline, Polygon} from "react-native-rnnmap";
 
 function MyMap() {
     const P0 = {latitude: 37.564362, longitude: 126.977011};
