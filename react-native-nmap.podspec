@@ -3,7 +3,7 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name         = "@kucic/react-native-nmap"
+  s.name         = "react-native-nmap"
   s.version      = package['version']
   s.summary      = "React Native Naver Mapview component for iOS + Android"
 
