@@ -6,7 +6,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.airbnb.android.react.maps.SizeReportingShadowNode;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
@@ -24,6 +23,9 @@ import com.naver.maps.map.util.FusedLocationSource;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+
+import com.github.quadflask.react.navermap.SizeReportingShadowNode;
 
 import static com.github.quadflask.react.navermap.ReactUtil.getDoubleOrNull;
 import static com.github.quadflask.react.navermap.ReactUtil.getInt;

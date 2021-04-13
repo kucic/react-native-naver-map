@@ -1,4 +1,4 @@
-package com.airbnb.android.react.maps;
+package com.github.quadflask.react.navermap;
 
 import android.os.Handler;
 import android.os.Looper;

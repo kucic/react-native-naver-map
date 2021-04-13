@@ -21,8 +21,8 @@ import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
 
-import com.airbnb.android.react.maps.TrackableView;
-import com.airbnb.android.react.maps.ViewChangesTracker;
+import com.github.quadflask.react.navermap.TrackableView;
+import com.github.quadflask.react.navermap.ViewChangesTracker;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
 import com.facebook.drawee.backends.pipeline.Fresco;
