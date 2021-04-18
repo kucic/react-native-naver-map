@@ -1,10 +1,21 @@
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
 import NaverMapView, {Align, Circle, Marker, Path, Polygon, Polyline} from "./map";
-import {Image, ImageBackground, PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View} from "react-native";
+import {
+    Image,
+    ImageBackground,
+    PermissionsAndroid,
+    Platform,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View
+} from "react-native";
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createStackNavigator} from "@react-navigation/stack";
+
+import ClusteredMapView from './ClusteredMapView'
 
 const P0 = {latitude: 37.564362, longitude: 126.977011};
 const P1 = {latitude: 37.565051, longitude: 126.978567};
@@ -40,43 +51,52 @@ const MapViewScreen = ({navigation}) => {
     }, []);
 
     return <>
-        <NaverMapView style={{width: '100%', height: '100%'}}
-                      showsMyLocationButton={true}
-                      center={{...P0, zoom: 16}}
-                      onTouch={e => console.warn('onTouch', JSON.stringify(e.nativeEvent))}
-                      onCameraChange={e => console.warn('onCameraChange', JSON.stringify(e))}
-                      onMapClick={e => console.warn('onMapClick', JSON.stringify(e))}
-                      useTextureView>
-            <Marker coordinate={P0} onClick={() => console.warn('onClick! p0')} caption={{text: "test caption", align: Align.Left}}/>
-            <Marker coordinate={P1} pinColor="blue" onClick={() => console.warn('onClick! p1')}/>
-            <Marker coordinate={P2} pinColor="red" alpha={0.5} onClick={() => console.warn('onClick! p2')}/>
-            <Marker coordinate={P4} onClick={() => console.warn('onClick! p4')} image={require("./marker.png")} width={48} height={48}/>
-            <Path coordinates={[P0, P1]} onClick={() => console.warn('onClick! path')} width={10}/>
-            <Polyline coordinates={[P1, P2]} onClick={() => console.warn('onClick! polyline')}/>
-            <Circle coordinate={P0} color={"rgba(255,0,0,0.3)"} radius={200} onClick={() => console.warn('onClick! circle')}/>
-            <Polygon coordinates={[P0, P1, P2]} color={`rgba(0, 0, 0, 0.5)`} onClick={() => console.warn('onClick! polygon')}/>
-            <Marker coordinate={P5} onClick={() => console.warn('onClick! p0')} width={96} height={96}>
-                <View style={{backgroundColor: 'rgba(255,0,0,0.2)', borderRadius: 80}}>
-                    <View style={{backgroundColor: 'rgba(0,0,255,0.3)', borderWidth: 2, borderColor: 'black', flexDirection: 'row'}}>
-                        <Image source={require("./marker.png")} style={{
-                            width: 32, height: 32,
-                            backgroundColor: 'rgba(0,0,0,0.2)', resizeMode: 'stretch',
-                            borderWidth: 2, borderColor: 'black'
-                        }} fadeDuration={0}/>
-                        <Text>Image</Text>
-                    </View>
-                    <ImageBackground source={require("./marker.png")} style={{width: 64, height: 64}}>
-                        <Text>image background</Text>
-                    </ImageBackground>
-                </View>
-            </Marker>
-        </NaverMapView>
-        <TouchableOpacity style={{position: 'absolute', bottom: '10%', right: 8}} onPress={() => navigation.navigate('stack')}>
+        <ClusteredMapView
+            style={{width: '100%', height: '100%'}}
+            showsMyLocationButton={true}
+            center={{...P0, zoom: 16}}
+            onTouch={e => console.warn('onTouch', JSON.stringify(e.nativeEvent))}
+            onCameraChange={e => console.warn('onCameraChange', JSON.stringify(e))}
+            onMapClick={e => console.warn('onMapClick', JSON.stringify(e))}
+            useTextureView
+            clusteringEnabled={true}
+        >
+            <Marker coordinate={P0} onClick={() => console.warn('onClick! p0')}/>
+            <Marker coordinate={P1} onClick={() => console.warn('onClick! p0')}/>
+            <Marker coordinate={P2} onClick={() => console.warn('onClick! p0')}/>
+            <Marker coordinate={P4} onClick={() => console.warn('onClick! p0')}/>
+            {/*<Marker coordinate={P0} onClick={() => console.warn('onClick! p0')} caption={{text: "test caption", align: Align.Left}}/>*/}
+            {/*<Marker coordinate={P1} pinColor="blue" onClick={() => console.warn('onClick! p1')}/>*/}
+            {/*<Marker coordinate={P2} pinColor="red" alpha={0.5} onClick={() => console.warn('onClick! p2')}/>*/}
+            {/*<Marker coordinate={P4} onClick={() => console.warn('onClick! p4')} image={require("./marker.png")} width={48} height={48}/>*/}
+            {/*<Path coordinates={[P0, P1]} onClick={() => console.warn('onClick! path')} width={10}/>*/}
+            {/*<Polyline coordinates={[P1, P2]} onClick={() => console.warn('onClick! polyline')}/>*/}
+            {/*<Circle coordinate={P0} color={"rgba(255,0,0,0.3)"} radius={200} onClick={() => console.warn('onClick! circle')}/>*/}
+            {/*<Polygon coordinates={[P0, P1, P2]} color={`rgba(0, 0, 0, 0.5)`} onClick={() => console.warn('onClick! polygon')}/>*/}
+            {/*<Marker coordinate={P5} onClick={() => console.warn('onClick! p0')} width={96} height={96}>*/}
+            {/*    <View style={{backgroundColor: 'rgba(255,0,0,0.2)', borderRadius: 80}}>*/}
+            {/*        <View style={{backgroundColor: 'rgba(0,0,255,0.3)', borderWidth: 2, borderColor: 'black', flexDirection: 'row'}}>*/}
+            {/*            <Image source={require("./marker.png")} style={{*/}
+            {/*                width: 32, height: 32,*/}
+            {/*                backgroundColor: 'rgba(0,0,0,0.2)', resizeMode: 'stretch',*/}
+            {/*                borderWidth: 2, borderColor: 'black'*/}
+            {/*            }} fadeDuration={0}/>*/}
+            {/*            <Text>Image</Text>*/}
+            {/*        </View>*/}
+            {/*        <ImageBackground source={require("./marker.png")} style={{width: 64, height: 64}}>*/}
+            {/*            <Text>image background</Text>*/}
+            {/*        </ImageBackground>*/}
+            {/*    </View>*/}
+            {/*</Marker>*/}
+        </ClusteredMapView>
+        <TouchableOpacity style={{position: 'absolute', bottom: '10%', right: 8}}
+                          onPress={() => navigation.navigate('stack')}>
             <View style={{backgroundColor: 'gray', padding: 4}}>
                 <Text style={{color: 'white'}}>open stack</Text>
             </View>
         </TouchableOpacity>
-        <Text style={{position: 'absolute', top: '95%', width: '100%', textAlign: 'center'}}>Icon made by Pixel perfect from www.flaticon.com</Text>
+        <Text style={{position: 'absolute', top: '95%', width: '100%', textAlign: 'center'}}>Icon made by Pixel perfect
+            from www.flaticon.com</Text>
     </>
 };
 

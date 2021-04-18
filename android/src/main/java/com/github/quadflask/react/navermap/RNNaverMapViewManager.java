@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.quadflask.react.navermap.SizeReportingShadowNode;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
@@ -23,9 +24,6 @@ import com.naver.maps.map.util.FusedLocationSource;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-
-import com.github.quadflask.react.navermap.SizeReportingShadowNode;
 
 import static com.github.quadflask.react.navermap.ReactUtil.getDoubleOrNull;
 import static com.github.quadflask.react.navermap.ReactUtil.getInt;
@@ -65,6 +63,12 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     @Override
     protected RNNaverMapViewContainer createViewInstance(@NonNull ThemedReactContext reactContext) {
         return new RNNaverMapViewContainer(reactContext, appContext, locationSource, getNaverMapViewOptions());
+    }
+
+    @Override
+    public void onDropViewInstance(@NonNull RNNaverMapViewContainer view) {
+        super.onDropViewInstance(view);
+        view.onDropViewInstance();
     }
 
     protected NaverMapOptions getNaverMapViewOptions() {
