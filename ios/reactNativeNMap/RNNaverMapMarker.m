@@ -46,53 +46,6 @@
   return self;
 }
 
-- (void)layoutSubviews {
-    float width = 0;
-    float height = 0;
-    for(UIView *v in [_iconView subView]) {
-        float fw = v.frame.origin.x + v.frame.size.width;
-        float fh = v.frame.origin.y + v.frame.size.height;
-
-        width = MAX(fw, width);
-        height = MAX(fh, height);
-    }
-    [_iconView setFrame:CGRectMake(0,0,width,height)];
-}
-
-- (void)iconViewInsertSubview:(UIView*)subview atIndex:(NSInteger)atIndex {
-    // check _realMarker.iconImage
-    /*
-     // iconImage -> iconView 가 있는지 그안에 내용을 수정해도 되는지 확인해야한다.
-     if(!_realMarker.iconImage){
-        // iconView?
-        if(!_realMarker.iconImage.iconView) {
-            _iconView = [[UIView alloc] init];
-            _realMarker.iconImage.iconView = _iconView;
-        }
-     }
-     [_iconView insertsubview:subview atIndex:atIndex];
-     */
-}
-
-- (void)insertReactSubview:(id<RCTComponent>)subview atIndex:(NSInteger)atIndex {
-    //[self iconViewInsertSubview:(UIView*)subview atIndex:atIndex+1];
-    // dummy view
-
-}
-
-- (void)removeReactSubview:(id<RCTComponent>)dummySubview {
-    /*
-     UIView* subview = ((AIRDummyView*)dummySubview).view;
-
-     if ([subview isKindOfClass:[AIRGoogleMapCallout class]]) {
-       self.calloutView = nil;
-     } else {
-       [(UIView*)subview removeFromSuperview];
-     }
-     [super removeReactSubview:(UIView*)dummySubview];
-     */
-}
-
 - (void)setZIndex:(NSInteger) zIndex {
     _realMarker.zIndex = zIndex;
 }
