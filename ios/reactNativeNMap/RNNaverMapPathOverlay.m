@@ -65,6 +65,18 @@
   _realOverlay.passedOutlineColor = passedOutlineColor;
 }
 
+- (void) setHideCollidedMarkers: (BOOL) isHideCollidedMarkers {
+    _realOverlay.isHideCollidedMarkers = isHideCollidedMarkers;
+}
+
+- (void) setHideCollidedSymbols: (BOOL) isHideCollidedSymbols {
+    _realOverlay.isHideCollidedSymbols = isHideCollidedSymbols;
+}
+
+- (void) setHideCollidedCaptions: (BOOL) isHideCollidedCaptions {
+    _realOverlay.isHideCollidedCaptions = isHideCollidedCaptions;
+}
+
 - (void) setPattern: (NSString*) pattern {
   if (_reloadImageCancellationBlock) {
     _reloadImageCancellationBlock();

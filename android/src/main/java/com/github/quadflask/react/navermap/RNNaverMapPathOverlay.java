@@ -84,6 +84,18 @@ public class RNNaverMapPathOverlay extends ClickableRNNaverMapFeature<PathOverla
         feature.setPatternInterval(patternInterval);
     }
 
+    public void setHideCollidedMarkers(boolean isHideCollidedMarkers) {
+        feature.setHideCollidedMarkers(isHideCollidedMarkers);
+    }
+
+    public void setHideCollidedSymbols(boolean isHideCollidedSymbols) {
+        feature.setHideCollidedSymbols(isHideCollidedSymbols);
+    }
+
+    public void setHideCollidedCaptions(boolean isHideCollidedCaptions) {
+        feature.setHideCollidedCaptions(isHideCollidedCaptions);
+    }
+
     public void setPattern(String uri) {
         if (uri != null) {
             OverlayImage overlayImage = OverlayImages.get(uri);

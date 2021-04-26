@@ -107,4 +107,19 @@ public class RNNaverMapPathOverlayManager extends EventEmittableViewGroupManager
     public void setProgress(RNNaverMapPathOverlay view, float progress) {
         view.setProgress(progress);
     }
+
+    @ReactProp(name = "isHideCollidedMarkers", defaultBoolean = false)
+    public void setHideCollidedMarkers(RNNaverMapPathOverlay view, boolean isHideCollidedMarkers) {
+        view.setHideCollidedMarkers(isHideCollidedMarkers);
+    }
+
+    @ReactProp(name = "isHideCollidedSymbols", defaultBoolean = false)
+    public void setHideCollidedSymbols(RNNaverMapPathOverlay view, boolean isHideCollidedSymbols) {
+        view.setHideCollidedSymbols(isHideCollidedSymbols);
+    }
+
+    @ReactProp(name = "isHideCollidedCaptions", defaultBoolean = false)
+    public void setHideCollidedCaptions(RNNaverMapPathOverlay view, boolean isHideCollidedCaptions) {
+        view.setHideCollidedCaptions(isHideCollidedCaptions);
+    }
 }

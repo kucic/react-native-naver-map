@@ -27,5 +27,8 @@
 @property (nonatomic, assign) NSString* pattern;
 @property (nonatomic, assign) CGFloat patternInterval;
 @property (nonatomic, copy) RCTDirectEventBlock onClick;
+@property (nonatomic, assign) BOOL isHideCollidedMarkers;
+@property (nonatomic, assign) BOOL isHideCollidedSymbols;
+@property (nonatomic, assign) BOOL isHideCollidedCaptions;
 
 @end

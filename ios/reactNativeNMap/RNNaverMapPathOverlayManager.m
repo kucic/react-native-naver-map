@@ -41,5 +41,7 @@ RCT_EXPORT_VIEW_PROPERTY(passedOutlineColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(pattern, NSString)
 RCT_EXPORT_VIEW_PROPERTY(patternInterval, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(onClick, RCTDirectEventBlock)
-
+RCT_EXPORT_VIEW_PROPERTY(isHideCollidedMarkers, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(isHideCollidedSymbols, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(isHideCollidedCaptions, BOOL)
 @end
