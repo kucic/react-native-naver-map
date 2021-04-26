@@ -1,7 +1,9 @@
 import React, { memo } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { Marker } from "./map"
+import {Align, Marker} from "./map"
 import { returnMarkerStyle } from "./helper";
+
+const icon_clustering = require("./assets/clusteringMarker_128.png");
 
 const ClusteredMarker = ({
                              geometry,
@@ -25,8 +27,12 @@ const ClusteredMarker = ({
             onClick={onClick}
             width={width}
             height={height}
+            image={icon_clustering}
+            caption={{text:points.toString(), align: Align.Center, color: clusterTextColor, textSize:fontSize, haloColor:"rgba(0,0,0,0.4)"}}
         >
-            <TouchableOpacity
+            {
+                /*
+                <TouchableOpacity
                 activeOpacity={0.5}
                 style={[styles.container, { width, height }]}
             >
@@ -66,6 +72,9 @@ const ClusteredMarker = ({
                     </Text>
                 </View>
             </TouchableOpacity>
+                 */
+            }
+
         </Marker>
     );
 };

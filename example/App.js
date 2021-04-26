@@ -51,7 +51,7 @@ const MapViewScreen = ({navigation}) => {
     }, []);
 
     return <>
-        <NaverMapView
+        <ClusteredMapView
             style={{width: '100%', height: '100%'}}
             showsMyLocationButton={true}
             center={{...P0, zoom: 16}}
@@ -64,7 +64,7 @@ const MapViewScreen = ({navigation}) => {
             <Marker coordinate={P0} onClick={() => console.warn('onClick! p0')}/>
             <Marker coordinate={P1} onClick={() => console.warn('onClick! p0')}/>
             <Marker coordinate={P2} onClick={() => console.warn('onClick! p0')}/>
-            <Marker coordinate={P4} onClick={() => console.warn('onClick! p0')}/>
+            <Marker coordinate={P4} onClick={() => console.warn('onClick! p0')} caption={{text:"9", align: Align.Center}}/>
             {/*<Marker coordinate={P0} onClick={() => console.warn('onClick! p0')} caption={{text: "test caption", align: Align.Left}}/>*/}
             {/*<Marker coordinate={P1} pinColor="blue" onClick={() => console.warn('onClick! p1')}/>*/}
             {/*<Marker coordinate={P2} pinColor="red" alpha={0.5} onClick={() => console.warn('onClick! p2')}/>*/}
@@ -94,7 +94,7 @@ const MapViewScreen = ({navigation}) => {
             {/*        </ImageBackground>*/}
             {/*    </View>*/}
             {/*</Marker>*/}
-        </NaverMapView>
+        </ClusteredMapView>
         <TouchableOpacity style={{position: 'absolute', bottom: '10%', right: 8}}
                           onPress={() => navigation.navigate('stack')}>
             <View style={{backgroundColor: 'gray', padding: 4}}>
