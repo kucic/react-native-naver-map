@@ -150,6 +150,28 @@ RCT_CUSTOM_VIEW_PROPERTY(bearing, BOOL, RNNaverMapView)
   // TODO
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(logoGravity, BOOL, RNNaverMapView)
+{
+    if (json == nil) return;
+    int type = [json intValue];
+    switch(type) {
+        case 80:
+            view.mapView.logoAlign = NMFLogoAlignLeftBottom;
+            break;
+        case 5:
+            view.mapView.logoAlign = NMFLogoAlignRightBottom;
+            break;
+        case 48:
+            view.mapView.logoAlign = NMFLogoAlignLeftTop;
+            break;
+        case 3:
+            view.mapView.logoAlign = NMFLogoAlignRightTop;
+            break;
+    }
+    view.mapView.logoAlign = type;
+}
+
+
 RCT_EXPORT_METHOD(setLocationTrackingMode:(nonnull NSNumber *)reactTag
                   withMode: (nonnull NSNumber *) mode
                   )
